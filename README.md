@@ -1,1 +1,2 @@
-# soz-project
+# soz-project 
+### Yavor, Milen, Blago
