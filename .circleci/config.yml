@@ -12,7 +12,8 @@ jobs:
       - image: cimg/base:stable
     steps:
       - docker/build:
-          image: credit-evaluator 
+          image: creadit-evaluator 
+          docker-context: ./Dockerfile 
 
 workflows:
   example-workflow:
