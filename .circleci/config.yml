@@ -13,7 +13,6 @@ jobs:
     steps:
       - docker/build:
           image: creadit-evaluator 
-          docker-context: ./Dockerfile 
 
 workflows:
   example-workflow:
