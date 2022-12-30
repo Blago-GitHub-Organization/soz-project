@@ -12,7 +12,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - docker/build:
-          image: CreditEvaluator 
+          image: credit-evaluator 
 
 workflows:
   example-workflow:
