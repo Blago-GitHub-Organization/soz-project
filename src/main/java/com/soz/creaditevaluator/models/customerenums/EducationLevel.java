@@ -1,0 +1,6 @@
+package com.soz.creaditevaluator.models.customerenums;
+
+public enum EducationLevel
+{
+    EARLY_CHILDHOOD_EDUCATION, PRIMARY_EDUCATION, LOWER_SECONDARY_EDUCATION, UPPER_SECONDARY_EDUCATION, POST_SECONDARY, SHORT_CYCLE, BACHELOR, MASTER
+}
