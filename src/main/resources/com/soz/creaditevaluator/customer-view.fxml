@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.soz.creaditevaluator.controllers.CustomerController">
+   <children>
+      <Button layoutX="265.0" layoutY="209.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="146.0" text="hello" />
+   </children>
+</AnchorPane>
