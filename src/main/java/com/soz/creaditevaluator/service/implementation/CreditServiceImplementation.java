@@ -5,7 +5,7 @@ import com.soz.creaditevaluator.service.interfaces.CreditService;
 
 import java.math.BigDecimal;
 
-public class CreditServiceImplementation implements CreditService
+public class CreditServiceImplementation implements CreditService //todo implement
 {
     @Override
     public BigDecimal calculateFullRisk(Credit credit)

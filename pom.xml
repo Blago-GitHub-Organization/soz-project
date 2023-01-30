@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.soz.creaditevaluator.creaditevaluator/com.soz.creaditevaluator.HelloApplication
+                                com.soz.creaditevaluator.creaditevaluator/com.soz.creaditevaluator.CreditApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
