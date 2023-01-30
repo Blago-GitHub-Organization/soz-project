@@ -12,9 +12,9 @@ public class CreditApplication extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(CreditApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(CreditApplication.class.getResource("credit-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 640);
-        stage.setTitle("Hello!");
+        stage.setTitle("Credit");
         stage.setScene(scene);
         stage.show();
     }
