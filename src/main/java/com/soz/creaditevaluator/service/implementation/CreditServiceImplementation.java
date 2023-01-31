@@ -29,13 +29,13 @@ public class CreditServiceImplementation implements CreditService //todo impleme
         return amountScore.add(capitalScore).add(installmentScore).add(periodScore).add(creditTypeScore);
     }
 
-    public BigDecimal calculateAmountScore(Credit credit, BigDecimal investmentAmount, BigDecimal currentAmount)
+    public BigDecimal calculateAmountScore(Credit credit)
     {
         amountScore = investmentAmount.subtract(currentAmount).abs();
         return amountScore;
     }
 
-    public BigDecimal calculateCapitalScore(Credit credit, BigDecimal investmentAmount, double marketStability, double ventureStability)
+    public BigDecimal calculateCapitalScore(Credit credit)
     {
         BigDecimal marketStabilityBD = BigDecimal.valueOf(marketStability);
         BigDecimal ventureStabilityBD = BigDecimal.valueOf(ventureStability);
@@ -46,7 +46,7 @@ public class CreditServiceImplementation implements CreditService //todo impleme
         return capitalScore;
     }
 
-    public BigDecimal calculateInstallmentScore(Credit credit, BigDecimal loanAmount, BigDecimal monthlyInstallment, BigDecimal investmentAmount)
+    public BigDecimal calculateInstallmentScore(Credit credit)
     {
         BigDecimal loanTermInMonths = loanAmount.divide(monthlyInstallment, 0, BigDecimal.ROUND_UP);
         BigDecimal monthlyIncomeAfterLoan = investmentAmount.subtract(monthlyInstallment);
@@ -54,14 +54,14 @@ public class CreditServiceImplementation implements CreditService //todo impleme
         return installmentScore;
     }
 
-    public BigDecimal calculatePeriodScore(Credit credit, BigDecimal investmentAmount, BigDecimal currentAmount, BigDecimal timePeriod)
+    public BigDecimal calculatePeriodScore(Credit credit)
     {
         BigDecimal rateOfReturn = currentAmount.subtract(investmentAmount).divide(investmentAmount, 10, BigDecimal.ROUND_HALF_EVEN);
         periodScore = rateOfReturn.divide(timePeriod, 10, BigDecimal.ROUND_HALF_EVEN);
         return periodScore;
     }
 
-    public BigDecimal calculateCreditTypeScore(Credit credit, BigDecimal creditScore, BigDecimal creditLimit, BigDecimal debtToIncomeRatio)
+    public BigDecimal calculateCreditTypeScore(Credit credit)
     {
         BigDecimal creditScoreWeight = new BigDecimal("0.4");
         BigDecimal creditLimitWeight = new BigDecimal("0.3");
