@@ -15,12 +15,8 @@ public class CreditToCustomerServiceImplementation implements CreditToCustomerSe
     @Override
     public BigDecimal calculateCreditToCustomerFullScore(Credit credit, Customer customer)
     {
-<<<<<<< HEAD
         return installmentPerSalaryScore.add(periodPerWorkExperienceScore).add(capitalPerWorkExperienceScore);
-=======
 
-        return null;
->>>>>>> master
     }
 
     @Override
