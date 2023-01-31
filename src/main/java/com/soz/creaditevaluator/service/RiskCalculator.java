@@ -28,7 +28,7 @@ public class RiskCalculator
 
         final BigDecimal customerRisk = customerService.calculateFullRisk(customer);
 
-        final BigDecimal creditToCustomerRisk = creditToCustomerService.calculateFullRisk(credit, customer);
+        final BigDecimal creditToCustomerRisk = creditToCustomerService.calculateFullScore(credit, customer);
 
         return true; //todo should be calculated
     }
