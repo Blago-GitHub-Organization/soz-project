@@ -7,12 +7,12 @@ import java.math.BigDecimal;
 
 public interface CreditToCustomerService
 {
-    public BigDecimal calculateFullRisk(final Credit credit, final Customer customer);  //should use all others methods and return between 0 and 1000 (or 10000, or anything big)
+    public BigDecimal calculateCreditToCustomerFullScore(final Credit credit, final Customer customer);  //should use all others methods and return between 0 and 1000 (or 10000, or anything big)
 
-    public BigDecimal calculateInstallmentPerSalaryRisk(final Credit credit, final Customer customer);
+    public BigDecimal calculateInstallmentPerSalaryScore(final Credit credit, final Customer customer);
 
-    public BigDecimal calculatePeriodPerWorkExperienceRisk(final Credit credit, final Customer customer);
+    public BigDecimal calculatePeriodPerWorkExperienceScore(final Credit credit, final Customer customer);
 
-    public BigDecimal calculateCapitalPerWorkExperienceRisk(final Credit credit, final Customer customer);
+    public BigDecimal calculateCapitalPerWorkExperienceScore(final Credit credit, final Customer customer);
 
 }
