@@ -1,18 +1,14 @@
+
 package com.soz.creaditevaluator.controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import com.soz.creaditevaluator.CreditApplication;
-import com.soz.creaditevaluator.models.customerenums.MaritalStatus;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.stage.Stage;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 public class CreditController {
 
@@ -23,39 +19,104 @@ public class CreditController {
     private URL location;
 
     @FXML
-    private ChoiceBox<MaritalStatus> martialStatusComboBox;
+    private TextArea Interest;
 
     @FXML
-    private Button nextButton;
+    private ChoiceBox<?> chboxCreditType;
+
     @FXML
     private Button exitButton;
 
     @FXML
-    void exitAction(ActionEvent event) {
-        Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
-    }
-
+    private Button nextButton;
 
     @FXML
-    void nextButtonOnAction(ActionEvent event) throws IOException
-    {
-        Stage stage = new Stage();
+    private TextField txtAmount;
 
-        FXMLLoader fxmlLoader = new FXMLLoader(CreditApplication.class.getResource("customer-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 640);
-        stage.setTitle("Customer");
-        stage.setScene(scene);
-        stage.show();
-        nextButton.setVisible(false);
+    @FXML
+    private TextArea txtCapital;
+
+    @FXML
+    private TextArea txtCollateral;
+
+    @FXML
+    private TextArea txtInstallment;
+
+    @FXML
+    private TextArea txtPeriod;
+
+    @FXML
+    void exitAction(ActionEvent event) {
+
     }
 
+    @FXML
+    void nextButtonOnAction(ActionEvent event) {
+
+    }
 
     @FXML
     void initialize() {
-        assert martialStatusComboBox != null : "fx:id=\"martialStatusComboBox\" was not injected: check your FXML file 'credit-view.fxml'.";
-        martialStatusComboBox.getItems().setAll(MaritalStatus.values());
+        assert Interest != null : "fx:id=\"Interest\" was not injected: check your FXML file 'credit-view.fxml'.";
+        assert chboxCreditType != null : "fx:id=\"chboxCreditType\" was not injected: check your FXML file 'credit-view.fxml'.";
+        assert exitButton != null : "fx:id=\"exitButton\" was not injected: check your FXML file 'credit-view.fxml'.";
+        assert nextButton != null : "fx:id=\"nextButton\" was not injected: check your FXML file 'credit-view.fxml'.";
+        assert txtAmount != null : "fx:id=\"txtAmount\" was not injected: check your FXML file 'credit-view.fxml'.";
+        assert txtCapital != null : "fx:id=\"txtCapital\" was not injected: check your FXML file 'credit-view.fxml'.";
+        assert txtCollateral != null : "fx:id=\"txtCollateral\" was not injected: check your FXML file 'credit-view.fxml'.";
+        assert txtInstallment != null : "fx:id=\"txtInstallment\" was not injected: check your FXML file 'credit-view.fxml'.";
+        assert txtPeriod != null : "fx:id=\"txtPeriod\" was not injected: check your FXML file 'credit-view.fxml'.";
 
     }
 
 }
+
+//    @FXML
+//    private Button nextButton;
+//    @FXML
+//    private Button exitButton;
+//
+//    @FXML
+//    void exitAction(ActionEvent event) {
+//        Stage stage = (Stage) exitButton.getScene().getWindow();
+//        stage.close();
+//    }
+//
+//
+//    @FXML
+//    void nextButtonOnAction(ActionEvent event) throws IOException
+//    {
+//        Stage stage = new Stage();
+//
+//        FXMLLoader fxmlLoader = new FXMLLoader(CreditApplication.class.getResource("customer-view.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load(), 800, 640);
+//        stage.setTitle("Customer");
+//        stage.setScene(scene);
+//        stage.show();
+//        nextButton.setVisible(false);
+//    }
+
+//    @FXML
+//    private Button nextButton;
+//    @FXML
+//    private Button exitButton;
+//
+//    @FXML
+//    void exitAction(ActionEvent event) {
+//        Stage stage = (Stage) exitButton.getScene().getWindow();
+//        stage.close();
+//    }
+//
+//
+//    @FXML
+//    void nextButtonOnAction(ActionEvent event) throws IOException
+//    {
+//        Stage stage = new Stage();
+//
+//        FXMLLoader fxmlLoader = new FXMLLoader(CreditApplication.class.getResource("customer-view.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load(), 800, 640);
+//        stage.setTitle("Customer");
+//        stage.setScene(scene);
+//        stage.show();
+//        nextButton.setVisible(false);
+//    }
