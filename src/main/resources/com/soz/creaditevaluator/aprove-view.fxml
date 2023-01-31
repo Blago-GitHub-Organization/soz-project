@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="203.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.soz.creaditevaluator.controllers.AproveController">
+<AnchorPane prefHeight="203.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.soz.creaditevaluator.controllers.ApproveController">
    <children>
       <Text fx:id="txtAprove" layoutX="95.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aprove">
          <font>

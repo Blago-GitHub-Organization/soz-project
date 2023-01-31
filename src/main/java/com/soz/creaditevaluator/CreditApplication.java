@@ -1,5 +1,6 @@
 package com.soz.creaditevaluator;
 
+import com.soz.creaditevaluator.service.StateManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,15 +10,11 @@ import java.io.IOException;
 
 public class CreditApplication extends Application
 {
+    StateManager stateManager = new StateManager();
     @Override
     public void start(Stage stage) throws IOException
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(CreditApplication.class.getResource("credit-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 640);
-        stage.setTitle("Credit");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+       stateManager.showCreditStage(stage);
     }
 
     public static void main(String[] args)

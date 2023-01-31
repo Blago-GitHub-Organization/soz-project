@@ -22,14 +22,14 @@ public class RiskCalculator
         this.customerService = customerService;
     }
 
-    public boolean calculateRisk(final Customer customer, final Credit credit)
+    public BigDecimal calculateRisk(final Customer customer, final Credit credit)
     {
-        final BigDecimal creditRisk = creditService.calculateFullRisk(credit);
+        final BigDecimal creditRisk = creditService.calculateFullScore(credit);
 
         final BigDecimal customerRisk = customerService.calculateFullRisk(customer);
 
         final BigDecimal creditToCustomerRisk = creditToCustomerService.calculateFullRisk(credit, customer);
 
-        return true; //todo should be calculated
+        return creditRisk.add(customerRisk).add(creditToCustomerRisk); //todo should be calculated
     }
 }
