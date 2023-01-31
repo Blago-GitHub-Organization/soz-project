@@ -90,7 +90,7 @@ public class CreditController
     }
 
     @FXML
-    void nextButtonOnAction(ActionEvent event) throws IOException
+    public void nextButtonOnAction(ActionEvent event) throws IOException
     {
         Stage stage = new Stage();
 
