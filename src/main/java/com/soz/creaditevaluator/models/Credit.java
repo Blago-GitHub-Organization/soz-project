@@ -19,9 +19,9 @@ public class Credit
         return installment;
     }
 
-    public void setInstallment(BigDecimal installment)
+    public void setInstallment()
     {
-        this.installment = installment;
+        this.installment = this.amount.divide(new BigDecimal(period), BigDecimal.ROUND_HALF_UP);
     }
 
     public BigDecimal getAmount()
@@ -29,9 +29,16 @@ public class Credit
         return amount;
     }
 
-    public void setAmount(BigDecimal amount)
+    public void setAmount()
     {
-        this.amount = amount;
+        BigDecimal principal = getCapital();
+        BigDecimal interest = getInterest();
+
+        BigDecimal interestPerMonth = interest.divide(new BigDecimal(12), 2, BigDecimal.ROUND_HALF_UP)
+                                              .divide(new BigDecimal(100), 2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal totalSum = principal.add(principal.multiply(interestPerMonth).multiply(new BigDecimal(getPeriod())));
+
+        this.amount = totalSum;
     }
 
     public BigDecimal getCapital()
@@ -69,9 +76,16 @@ public class Credit
         return interest;
     }
 
-    public void setInterest(BigDecimal interest)
+    public void setInterest()
     {
-        this.interest = interest;
+        switch (getCreditType())
+        {
+            case HOME_LOAN -> this.interest = new BigDecimal("6.9");
+            case PRODUCT_LOAN -> this.interest = new BigDecimal("8.1");
+            case PERSONAL_LOAN -> this.interest = new BigDecimal("11.1");
+            case EDUCATIONAL_LOAN -> this.interest = new BigDecimal("3.7");
+            default -> this.interest = new BigDecimal("23.1");
+        }
     }
 
     public CreditType getCreditType()
