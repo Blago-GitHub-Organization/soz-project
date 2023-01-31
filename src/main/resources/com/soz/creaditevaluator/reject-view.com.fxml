@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="206.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.soz.creaditevaluator.controllers.RejectController">
+   <children>
+      <Text layoutX="113.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REJECT">
+         <font>
+            <Font size="120.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
