@@ -7,39 +7,69 @@ import java.math.BigDecimal;
 
 public class CreditServiceImplementation implements CreditService //todo implement
 {
-    @Override
-    public BigDecimal calculateFullRisk(Credit credit)
-    {
-        return null;
-    }
+    BigDecimal investmentAmount = CreditStaticVariables.investmentAmount;
+    BigDecimal currentAmount = CreditStaticVariables.currentAmount;
+    BigDecimal monthlyInstallment = CreditStaticVariables.monthlyInstallment;
+    BigDecimal loanAmount = CreditStaticVariables.loanAmount;
+    BigDecimal timePeriod = CreditStaticVariables.timePeriod;
+    BigDecimal creditScore = CreditStaticVariables.creditScore;
+    BigDecimal creditLimit = CreditStaticVariables.creditLimit;
+    BigDecimal debtToIncomeRatio = CreditStaticVariables.debtToIncomeRatio;
+    BigDecimal amountScore;
+    BigDecimal capitalScore;
+    BigDecimal installmentScore;
+    BigDecimal periodScore;
+    BigDecimal creditTypeScore;
+    double marketStability = CreditStaticVariables.marketStability;
+    double ventureStability = CreditStaticVariables.ventureStability;
 
     @Override
-    public BigDecimal calculateAmountRisk(Credit credit)
+    public BigDecimal calculateFullScore(Credit credit)
     {
-        return null;
+        return amountScore.add(capitalScore).add(installmentScore).add(periodScore).add(creditTypeScore);
     }
 
-    @Override
-    public BigDecimal calculateCapitalRisk(Credit credit)
+    public BigDecimal calculateAmountScore(Credit credit, BigDecimal investmentAmount, BigDecimal currentAmount)
     {
-        return null;
+        amountScore = investmentAmount.subtract(currentAmount).abs();
+        return amountScore;
     }
 
-    @Override
-    public BigDecimal calculateInstallmentRisk(Credit credit)
+    public BigDecimal calculateCapitalScore(Credit credit, BigDecimal investmentAmount, double marketStability, double ventureStability)
     {
-        return null;
+        BigDecimal marketStabilityBD = BigDecimal.valueOf(marketStability);
+        BigDecimal ventureStabilityBD = BigDecimal.valueOf(ventureStability);
+        BigDecimal stabilityProduct = marketStabilityBD.multiply(ventureStabilityBD);
+        BigDecimal one = BigDecimal.valueOf(1);
+        BigDecimal riskFactor = one.subtract(stabilityProduct);
+        capitalScore = investmentAmount.multiply(riskFactor);
+        return capitalScore;
     }
 
-    @Override
-    public BigDecimal calculatePeriodRisk(Credit credit)
+    public BigDecimal calculateInstallmentScore(Credit credit, BigDecimal loanAmount, BigDecimal monthlyInstallment, BigDecimal investmentAmount)
     {
-        return null;
+        BigDecimal loanTermInMonths = loanAmount.divide(monthlyInstallment, 0, BigDecimal.ROUND_UP);
+        BigDecimal monthlyIncomeAfterLoan = investmentAmount.subtract(monthlyInstallment);
+        installmentScore = monthlyIncomeAfterLoan.divide(loanTermInMonths, 2, BigDecimal.ROUND_UP);
+        return installmentScore;
     }
 
-    @Override
-    public BigDecimal calculateCreditTypeRisk(Credit credit)
+    public BigDecimal calculatePeriodScore(Credit credit, BigDecimal investmentAmount, BigDecimal currentAmount, BigDecimal timePeriod)
     {
-        return null;
+        BigDecimal rateOfReturn = currentAmount.subtract(investmentAmount).divide(investmentAmount, 10, BigDecimal.ROUND_HALF_EVEN);
+        periodScore = rateOfReturn.divide(timePeriod, 10, BigDecimal.ROUND_HALF_EVEN);
+        return periodScore;
+    }
+
+    public BigDecimal calculateCreditTypeScore(Credit credit, BigDecimal creditScore, BigDecimal creditLimit, BigDecimal debtToIncomeRatio)
+    {
+        BigDecimal creditScoreWeight = new BigDecimal("0.4");
+        BigDecimal creditLimitWeight = new BigDecimal("0.3");
+        BigDecimal debtToIncomeWeight = new BigDecimal("0.3");
+        creditTypeScore = creditScoreWeight.multiply(creditScore)
+                .add(creditLimitWeight.multiply(creditLimit))
+                .add(debtToIncomeWeight.multiply(debtToIncomeRatio))
+                .setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        return creditTypeScore;
     }
 }
