@@ -11,6 +11,7 @@ public class CreditToCustomerServiceImplementation implements CreditToCustomerSe
     @Override
     public BigDecimal calculateFullRisk(Credit credit, Customer customer)
     {
+
         return null;
     }
 

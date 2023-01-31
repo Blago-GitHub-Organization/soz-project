@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 
 public class RiskCalculator
 {
+
     private final CreditService creditService;
     private final CreditToCustomerService creditToCustomerService;
     private final CustomerService customerService;
