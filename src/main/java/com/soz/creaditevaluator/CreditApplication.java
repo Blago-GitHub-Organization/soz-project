@@ -13,7 +13,7 @@ public class CreditApplication extends Application
     public void start(Stage stage) throws IOException
     {
         FXMLLoader fxmlLoader = new FXMLLoader(CreditApplication.class.getResource("credit-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 640);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 450);
         stage.setTitle("Credit");
         stage.setScene(scene);
         stage.setResizable(false);
