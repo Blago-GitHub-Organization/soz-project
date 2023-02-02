@@ -128,7 +128,7 @@ public class CustomerController
     {
         final BigDecimal result = riskCalculator.calculateRisk(customer, credit);
         System.out.println(result);
-        final BigDecimal threshold = new BigDecimal("123456");
+        final BigDecimal threshold = new BigDecimal("80000");
         if (result.compareTo(threshold) >= 0)
         {
             showApprove();
