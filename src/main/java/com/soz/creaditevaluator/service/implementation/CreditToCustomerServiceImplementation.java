@@ -9,31 +9,34 @@ import java.math.RoundingMode;
 
 public class CreditToCustomerServiceImplementation implements CreditToCustomerService
 {
-    BigDecimal installmentPerSalaryScore;
-    BigDecimal periodPerWorkExperienceScore;
-    BigDecimal capitalPerWorkExperienceScore;
+
     @Override
     public BigDecimal calculateCreditToCustomerFullScore(Credit credit, Customer customer)
     {
+        BigDecimal installmentPerSalaryScore = calculateInstallmentPerSalaryScore(credit, customer) ;
+        BigDecimal periodPerWorkExperienceScore = calculatePeriodPerWorkExperienceScore(credit, customer);
+        BigDecimal capitalPerWorkExperienceScore = calculateCapitalPerWorkExperienceScore(credit, customer);
         return installmentPerSalaryScore.add(periodPerWorkExperienceScore).add(capitalPerWorkExperienceScore);
 
     }
 
     @Override
-    public BigDecimal calculateInstallmentPerSalaryScore(Credit credit, Customer customer) {
+    public BigDecimal calculateInstallmentPerSalaryScore(Credit credit, Customer customer)
+    {
 
         BigDecimal installment = credit.getInstallment();
         BigDecimal salary = customer.getSalary();
 
-        if (salary.compareTo(BigDecimal.ZERO) == 0) {
+        if (salary.compareTo(BigDecimal.ZERO) == 0)
+        {
             // Return a high risk value if the salary is zero
             return new BigDecimal("10.00");
-        } else {
+        } else
+        {
             // Calculate the risk by dividing the installment by the salary
-            installmentPerSalaryScore = installment.divide(salary, 2, RoundingMode.HALF_UP);
+            return  installment.divide(salary, 2, RoundingMode.HALF_UP);
         }
 
-        return installmentPerSalaryScore;
     }
 
 
@@ -45,16 +48,16 @@ public class CreditToCustomerServiceImplementation implements CreditToCustomerSe
         Integer period = credit.getPeriod();
         Integer fullWorkExperience = customer.getFullWorkExperience();
 
-        if (fullWorkExperience == 0) {
+        if (fullWorkExperience == 0)
+        {
             // Return a high risk value if the work experience is zero
             return new BigDecimal("10.00");
-        } else {
+        } else
+        {
             // Calculate the risk by dividing the period by the full work experience
-            periodPerWorkExperienceScore = new BigDecimal(period)
+            return new BigDecimal(period)
                     .divide(new BigDecimal(fullWorkExperience), 2, RoundingMode.HALF_UP);
         }
-
-        return periodPerWorkExperienceScore;
     }
 
     @Override
@@ -62,7 +65,7 @@ public class CreditToCustomerServiceImplementation implements CreditToCustomerSe
     {
 
         BigDecimal workExperienceFactor = BigDecimal.valueOf(customer.getFullWorkExperience() / 10.0);
-        capitalPerWorkExperienceScore = credit.getCapital().multiply(workExperienceFactor);
-        return capitalPerWorkExperienceScore;
+        return credit.getCapital().multiply(workExperienceFactor);
+
     }
 }

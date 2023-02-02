@@ -1,21 +1,38 @@
 package com.soz.creaditevaluator.controllers;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.soz.creaditevaluator.CreditApplication;
 import com.soz.creaditevaluator.models.Credit;
 import com.soz.creaditevaluator.models.Customer;
 import com.soz.creaditevaluator.models.customerenums.EducationLevel;
 import com.soz.creaditevaluator.models.customerenums.EmploymentType;
 import com.soz.creaditevaluator.models.customerenums.MaritalStatus;
+import com.soz.creaditevaluator.service.RiskCalculator;
+import com.soz.creaditevaluator.service.implementation.CreditServiceImplementation;
+import com.soz.creaditevaluator.service.implementation.CreditToCustomerServiceImplementation;
+import com.soz.creaditevaluator.service.implementation.CustomerServiceImplementation;
+import com.soz.creaditevaluator.service.interfaces.CreditService;
+import com.soz.creaditevaluator.service.interfaces.CreditToCustomerService;
+import com.soz.creaditevaluator.service.interfaces.CustomerService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class CustomerController
 {
@@ -72,6 +89,11 @@ public class CustomerController
 
     private Credit credit;
 
+    private final CreditService creditService = new CreditServiceImplementation();
+    private final CreditToCustomerService creditToCustomerService = new CreditToCustomerServiceImplementation();
+    private final CustomerService customerService = new CustomerServiceImplementation();
+    private final RiskCalculator riskCalculator = new RiskCalculator(creditService, creditToCustomerService, customerService);
+
     public void setCredit(Credit credit)
     {
         this.credit = credit;
@@ -83,7 +105,7 @@ public class CustomerController
     }
 
     @FXML
-    void btnRequestOnAction(ActionEvent event)
+    void btnRequestOnAction(ActionEvent event) throws IOException
     {
         customer.setFirstName(txtFName.getText());
         customer.setMiddleName(txtMName.getText());
@@ -94,12 +116,65 @@ public class CustomerController
         customer.setEmploymentStatus(chboxEmploymentStatus.getValue());
         customer.setEducationLevel(chboxEducationLevel.getValue());
         customer.setAddress(txtAdress.getText());
-        customer.setSalary(new BigDecimal(txtSalary.getText()));
+        customer.setSalary(new BigDecimal(Long.parseLong(txt.getText())));
         customer.setFullWorkExperience(Integer.parseInt(txtFullExperience.getText()));
         customer.setWorkExperienceWithCurrentEmployer(Integer.parseInt(txtCurEmpExp.getText()));
 
+        calculate();
+
     }
 
+    private void calculate() throws IOException
+    {
+        final BigDecimal result = riskCalculator.calculateRisk(customer, credit);
+        System.out.println(result);
+        final BigDecimal threshold = new BigDecimal("123456");
+        if (result.compareTo(threshold) >= 0)
+        {
+            showApprove();
+        }
+        else {
+            showReject();
+        }
+    }
+
+    private void showApprove() throws IOException
+    {
+        Stage stage = new Stage();
+
+        URL fxmlLocation = CreditApplication.class.getResource("approve-view.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+        Parent root = (Parent) fxmlLoader.load();
+        Scene scene = new Scene(root, 800, 640);
+        scene.setFill(new LinearGradient(
+                0, 0, 1, 1, true,
+                CycleMethod.NO_CYCLE,
+                new Stop(0, Color.web("#81c483")),
+                new Stop(1, Color.web("#b3ffb3"))));
+        stage.setTitle("Approve");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }
+
+    private void showReject() throws IOException
+    {
+        Stage stage = new Stage();
+
+        URL fxmlLocation = CreditApplication.class.getResource("reject-view.com.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+        Parent root = (Parent) fxmlLoader.load();
+        Scene scene = new Scene(root, 800, 640);
+        scene.setFill(new LinearGradient(
+                0, 0, 1, 1, true,
+                CycleMethod.NO_CYCLE,
+                new Stop(0, Color.web("#ff0000")),
+                new Stop(1, Color.web("#660000"))));
+        stage.setTitle("Reject");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }
     @FXML
     void initialize()
     {
