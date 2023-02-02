@@ -145,7 +145,7 @@ public class CustomerController
         URL fxmlLocation = CreditApplication.class.getResource("approve-view.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
         Parent root = (Parent) fxmlLoader.load();
-        Scene scene = new Scene(root, 800, 640);
+        Scene scene = new Scene(root, 800, 340);
         scene.setFill(new LinearGradient(
                 0, 0, 1, 1, true,
                 CycleMethod.NO_CYCLE,
@@ -164,7 +164,7 @@ public class CustomerController
         URL fxmlLocation = CreditApplication.class.getResource("reject-view.com.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
         Parent root = (Parent) fxmlLoader.load();
-        Scene scene = new Scene(root, 800, 640);
+        Scene scene = new Scene(root, 800, 340);
         scene.setFill(new LinearGradient(
                 0, 0, 1, 1, true,
                 CycleMethod.NO_CYCLE,
