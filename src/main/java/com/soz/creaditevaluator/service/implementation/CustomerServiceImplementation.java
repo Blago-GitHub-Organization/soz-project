@@ -113,7 +113,7 @@ public class CustomerServiceImplementation implements CustomerService
     @Override
     public BigDecimal calculateSalaryRisk(Customer customer)
     {
-        return customer.getSalary();
+        return customer.getSalary().multiply(BigDecimal.TEN);
     }
 
     @Override

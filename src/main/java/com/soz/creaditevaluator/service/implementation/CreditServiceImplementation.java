@@ -44,7 +44,6 @@ public class CreditServiceImplementation implements CreditService //todo impleme
         BigDecimal one = BigDecimal.valueOf(1);
         BigDecimal riskFactor = one.subtract(stabilityProduct);
         return credit.getCapital()
-                     .divide(riskFactor, 10, RoundingMode.HALF_UP)
                      .multiply(new BigDecimal(-1));
 
     }
