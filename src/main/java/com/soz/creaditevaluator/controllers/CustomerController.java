@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.soz.creaditevaluator.models.Credit;
 import com.soz.creaditevaluator.models.Customer;
 import com.soz.creaditevaluator.models.customerenums.EducationLevel;
 import com.soz.creaditevaluator.models.customerenums.EmploymentType;
@@ -68,6 +69,13 @@ public class CustomerController
     private Text txtSalary;
 
     private final Customer customer;
+
+    private Credit credit;
+
+    public void setCredit(Credit credit)
+    {
+        this.credit = credit;
+    }
 
     public CustomerController()
     {

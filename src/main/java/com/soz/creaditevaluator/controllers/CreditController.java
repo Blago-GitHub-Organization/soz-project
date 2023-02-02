@@ -12,6 +12,7 @@ import com.soz.creaditevaluator.models.creditenums.CreditType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -94,13 +95,18 @@ public class CreditController
     {
         Stage stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(CreditApplication.class.getResource("customer-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 640);
+        URL fxmlLocation = CreditApplication.class.getResource("customer-view.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
+        Parent root = (Parent) fxmlLoader.load();
+        CustomerController controller = fxmlLoader.getController();
+        controller.setCredit(this.credit);
+        Scene scene = new Scene(root, 800, 640);
         stage.setTitle("Customer");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
         nextButton.setDisable(true);
+
     }
 
     @FXML
